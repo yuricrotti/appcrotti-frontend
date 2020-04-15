@@ -194,10 +194,12 @@ const CadViajem = props => {
                                             value={produto_venda_compra}
                                             onChange={(event) => setProduto_venda_compra(event.target.value)}
                                         >
-                                          <MenuItem value={'Areia Padrão'}>Areia A</MenuItem>
-                                          <MenuItem value={'Areia B'}>Areia B</MenuItem>
-                                          <MenuItem value={'Brita Padrão'}>Pedra A</MenuItem>
-                                          <MenuItem value={'Pedra B'}>Pedra B</MenuItem>
+                                          <MenuItem value={'Brita' }>Brita</MenuItem>
+                                          <MenuItem value={'Areia Padrão '}>Areia Padrão</MenuItem>
+                                          <MenuItem value={'Argamassa'}>Argamassa</MenuItem>
+                                          <MenuItem value={'Areia Musulina'}>Areia Musulina</MenuItem>
+                                          <MenuItem value={'Pedrisco'}>Pedrisco</MenuItem>
+                                          <MenuItem value={'Pó de Pedra'}>Pó de Pedra</MenuItem>
                                         </Select>
                                       </FormControl>
                                     
