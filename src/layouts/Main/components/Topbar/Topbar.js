@@ -34,7 +34,7 @@ const Topbar = props => {
     >
       <Toolbar>
         <RouterLink to="/">
-          <h3>CrottiApp</h3>
+          <h3></h3>
         </RouterLink>
         <div className={classes.flexGrow} />
         <Hidden mdDown>

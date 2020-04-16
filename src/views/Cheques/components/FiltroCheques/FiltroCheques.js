@@ -44,12 +44,14 @@ const FiltroCheques = props => {
   const classes = useStyles();
 
   const [periodo, set_perido] = React.useState('Todas');
-  const [data_venda, set_data_venda] = useState([])
+  const [data_cheque_inicial, set_Data_cheque_inicial] = useState([])
+  const [data_cheque_final, set_Data_cheque_final] = useState([])
 
   
   const periodo_change = event => {
     if(event.target.value=="Todas"){
-        set_data_venda([])
+      set_Data_cheque_inicial([])
+      set_Data_cheque_final([])
     }  
     set_perido(event.target.value);
   };
@@ -61,7 +63,7 @@ const FiltroCheques = props => {
     var listafiltros = []
  
     if(periodo === "Mês"){
-      filtros.data_cheque = data_venda
+      filtros.data_cheque = data_cheque_inicial+","+data_cheque_final
       filtros.cond1 = "$gte"
       filtros.cond2 = "$lt"
       listafiltros.push(filtros)
@@ -88,18 +90,40 @@ const FiltroCheques = props => {
                           <FormControlLabel value="Todas" control={<Radio />} label="Todas" />                                              
                       </RadioGroup>
 
-                      <TextField
-                          disabled  = {periodo !== "Mês" ? true : false}
-                          name="data_venda"
-                          label="Mês da Venda *"
-                          type="date"
-                          className={classes.textField}
-                          InputLabelProps={{
-                              shrink: true,
-                          }}
-                          value={data_venda}
-                          onChange={e => set_data_venda(e.target.value)}
-                      />
+                  </FormControl>
+                </CardContent>  
+              </Card>
+            </Grid>
+
+            <Grid item xs={6}>
+              <Card className={classes.root} variant="outlined" fullWidth>
+                <CardContent>
+                  <FormControl component="fieldset">
+                    <TextField
+                      disabled  = {periodo !== "Mês" ? true : false}
+                      name="data_cheque_inicial"
+                      label="Mês inicial cheque *"
+                      type="date"
+                      className={classes.textField}
+                      InputLabelProps={{
+                          shrink: true,
+                      }}
+                      value={data_cheque_inicial}
+                      onChange={e => set_Data_cheque_inicial(e.target.value)}
+                    />
+
+                    <TextField
+                      disabled  = {periodo !== "Mês" ? true : false}
+                      name="data_venda_final"
+                      label="Mês cheque venda *"
+                      type="date"
+                      className={classes.textField}
+                      InputLabelProps={{
+                          shrink: true,
+                      }}
+                      value={data_cheque_final}
+                      onChange={e => set_Data_cheque_final(e.target.value)}
+                   />    
                   </FormControl>
                 </CardContent>  
               </Card>

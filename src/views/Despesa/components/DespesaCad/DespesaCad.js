@@ -73,7 +73,16 @@ const DespesaCad = props => {
     setFornecedores(props.fornecedores)
   }, [props.fornecedores] )
   
-
+  function data_atual_formata(){
+    var data = new Date(),
+        dia  = data.getDate().toString(),
+        diaF = (dia.length == 1) ? '0'+dia : dia,
+        mes  = (data.getMonth() + 1).toString(), //+1 pois no getMonth Janeiro começa com zero.
+        mesF = (mes.length == 1) ? '0'+mes : mes,
+        anoF = data.getFullYear();
+        
+    return anoF+"-"+(mesF)+"-"+diaF;
+}
   const salvar_despesa = (values,resetForm) => {
 
     if(status_form == false){
@@ -84,6 +93,7 @@ const DespesaCad = props => {
         numeroparcela_despesa:values.numeroparcela_despesa,
         fornecedor_despesa:fornecedor_despesa,
         valortotal_despesa : values.valortotal_despesa,
+        datacad_despesa : values.data,
         descricao_despesa:values.descricao_despesa,
         status_despesa :"E",
       }
@@ -110,13 +120,15 @@ const DespesaCad = props => {
       {!isSubmitionCompleted &&
         <React.Fragment>
           <Formik
-            initialValues={{valortotal_despesa: 0, fornecedor_despesa:[],numeroparcela_despesa:0 , descricao_despesa:''}}
+            initialValues={{valortotal_despesa: 0, fornecedor_despesa:[],numeroparcela_despesa:0 , descricao_despesa:'',data:data_atual_formata()}}
             onSubmit={(values, { resetForm }) => {
               salvar_despesa(values,resetForm);
               }}
             validationSchema={Yup.object().shape({
                
                 valortotal_despesa: Yup.number()
+                .required('Obrigatório'),
+                data: Yup.string()
                 .required('Obrigatório'),
                 numeroparcela_despesa: Yup.number()
                 .required('Obrigatório'),
@@ -229,18 +241,24 @@ const DespesaCad = props => {
                              />
                         </Grid>
 
-                        <Grid item xs={3}>
-                            
-                            <Button variant="contained" color="primary" type="submit" >
-                              {props.despesa !== null ? <span>Avançar</span> :<span>Salvar</span>}
-                            </Button>
-                            <Button variant="contained" color="secondary" onClick={null}>
-                                Cancelar
-                            </Button>
-
+                        <Grid item xs={2}>
+                            <TextField
+                                name="data"
+                                label="Data da Despesa: *"
+                                type="date"
+                                className={classes.textField}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                value={values.data}
+                                onChange={handleChange}
+                              
+                             />
                         </Grid>
 
-                        <Grid item xs={9}>
+                     
+
+                        <Grid item xs={12}>
                           
                         <TextField
                             disabled  = {status_form}
@@ -259,6 +277,17 @@ const DespesaCad = props => {
                         />
 
                       </Grid>
+
+                      <Grid item xs={3}>
+                            
+                            <Button variant="contained" color="primary" type="submit" >
+                              {props.despesa !== null ? <span>Avançar</span> :<span>Salvar</span>}
+                            </Button>
+                            <Button variant="contained" color="secondary" onClick={null}>
+                                Cancelar
+                            </Button>
+
+                        </Grid>
 
                     </Grid>
                 </CardContent>

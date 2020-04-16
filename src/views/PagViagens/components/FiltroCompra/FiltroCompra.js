@@ -70,7 +70,8 @@ const FiltroCompra = props => {
 
   const [fornecedores, setFornecedores] = useState([])
   const [fornecedor_compra, setFornecedorcompra] = useState([])
-  const [data_compra, setDatacompra] = useState([])
+  const [data_compra_inicial, set_Data_compra_inicial] = useState([])
+  const [data_compra_final, set_Data_compra_final] = useState([])
 
 
   useEffect(() => {
@@ -83,7 +84,8 @@ const FiltroCompra = props => {
   
   const PeriodoChange = event => {
     if(event.target.value=="Todas"){
-        setDatacompra([])
+        set_Data_compra_inicial([])
+        set_Data_compra_final([])
     }  
     setPerido(event.target.value);
   };
@@ -102,7 +104,7 @@ const FiltroCompra = props => {
     
      
         if(periodo === "Mês"){
-          filtros.data_compra = data_compra
+          filtros.data_compra =  data_compra_inicial + "," + data_compra_final
           filtros.cond1 = "$gte"
           filtros.cond2 = "$lt"
           listafiltros.push(filtros)
@@ -185,7 +187,7 @@ const FiltroCompra = props => {
                                 </Card>
                             </Grid>
 
-                            <Grid item xs={6}>
+                            <Grid item xs={3}>
                                 <Card className={classes.root} variant="outlined" fullWidth>
                                             <CardContent>
                                                 <FormControl component="fieldset">
@@ -195,18 +197,44 @@ const FiltroCompra = props => {
                                                         <FormControlLabel value="Todas" control={<Radio />} label="Todas" />                                              
                                                     </RadioGroup>
 
-                                                    <TextField
+                                                </FormControl>
+                                                
+                                            </CardContent>  
+                                    </Card>
+                                
+                            </Grid>
+
+
+                            <Grid item xs={3}>
+                                <Card className={classes.root} variant="outlined" fullWidth>
+                                            <CardContent>
+                                                <FormControl component="fieldset">
+                                                   <TextField
                                                         disabled  = {periodo !== "Mês" ? true : false}
-                                                        name="data_compra"
-                                                        label="Mês da Compra *"
+                                                        name="data_compra_inicial"
+                                                        label="Mês inicial compra *"
                                                         type="date"
                                                         className={classes.textField}
                                                         InputLabelProps={{
                                                             shrink: true,
                                                         }}
-                                                        value={data_compra}
-                                                        onChange={e => setDatacompra(e.target.value)}
+                                                        value={data_compra_inicial}
+                                                        onChange={e => set_Data_compra_inicial(e.target.value)}
                                                     />
+
+                                                      <TextField
+                                                        disabled  = {periodo !== "Mês" ? true : false}
+                                                        name="data_compra_final"
+                                                        label="Mês final compra *"
+                                                        type="date"
+                                                        className={classes.textField}
+                                                        InputLabelProps={{
+                                                            shrink: true,
+                                                        }}
+                                                        value={data_compra_final}
+                                                        onChange={e => set_Data_compra_final(e.target.value)}
+                                                    />    
+
                                                 </FormControl>
                                                 
                                             </CardContent>  

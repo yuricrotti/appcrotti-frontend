@@ -70,7 +70,8 @@ const FiltroVenda = props => {
 
   const [clientes, setClientes] = useState([])
   const [cliente_venda, setClientevenda] = useState([])
-  const [data_venda, setDatavenda] = useState([])
+  const [data_venda_inicial, set_Data_venda_inicial] = useState([])
+  const [data_venda_final, set_Data_venda_final] = useState([])
 
 
   useEffect(() => {
@@ -83,7 +84,8 @@ const FiltroVenda = props => {
   
   const PeriodoChange = event => {
     if(event.target.value=="Todas"){
-        setDatavenda([])
+        set_Data_venda_inicial([])
+        set_Data_venda_final([])
     }  
     setPerido(event.target.value);
   };
@@ -98,11 +100,11 @@ const FiltroVenda = props => {
     event.preventDefault();
     var filtros = {}
     var listafiltros = []
-    
+    var teste = ""
     
      
         if(periodo === "Mês"){
-          filtros.data_venda = data_venda
+          filtros.data_venda = data_venda_inicial + "," + data_venda_final
           filtros.cond1 = "$gte"
           filtros.cond2 = "$lt"
           listafiltros.push(filtros)
@@ -126,8 +128,9 @@ const FiltroVenda = props => {
         listafiltros.push(filtros)
         filtros = {}
         console.log(listafiltros)
+       
         props.listar_vendas_filtros(listafiltros)
-        //props.listar_despesas_filtros()
+       // props.listar_despesas_filtros()
 
 
   }
@@ -185,7 +188,7 @@ const FiltroVenda = props => {
                                 </Card>
                             </Grid>
 
-                            <Grid item xs={6}>
+                            <Grid item xs={3}>
                                 <Card className={classes.root} variant="outlined" fullWidth>
                                             <CardContent>
                                                 <FormControl component="fieldset">
@@ -195,18 +198,45 @@ const FiltroVenda = props => {
                                                         <FormControlLabel value="Todas" control={<Radio />} label="Todas" />                                              
                                                     </RadioGroup>
 
+                              
+                                                </FormControl>
+                                                
+                                            </CardContent>  
+                                    </Card>
+                                
+                            </Grid>
+
+
+                            <Grid item xs={3}>
+                                <Card className={classes.root} variant="outlined" fullWidth>
+                                            <CardContent>
+                                                <FormControl component="fieldset">
+                                                  
                                                     <TextField
                                                         disabled  = {periodo !== "Mês" ? true : false}
-                                                        name="data_venda"
-                                                        label="Mês da Venda *"
+                                                        name="data_venda_inicial"
+                                                        label="Mês inicial venda *"
                                                         type="date"
                                                         className={classes.textField}
                                                         InputLabelProps={{
                                                             shrink: true,
                                                         }}
-                                                        value={data_venda}
-                                                        onChange={e => setDatavenda(e.target.value)}
+                                                        value={data_venda_inicial}
+                                                        onChange={e => set_Data_venda_inicial(e.target.value)}
                                                     />
+
+                                                      <TextField
+                                                        disabled  = {periodo !== "Mês" ? true : false}
+                                                        name="data_venda_final"
+                                                        label="Mês final venda *"
+                                                        type="date"
+                                                        className={classes.textField}
+                                                        InputLabelProps={{
+                                                            shrink: true,
+                                                        }}
+                                                        value={data_venda_final}
+                                                        onChange={e => set_Data_venda_final(e.target.value)}
+                                                    />    
                                                 </FormControl>
                                                 
                                             </CardContent>  
