@@ -44,7 +44,8 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = (props) => {
   const classes = useStyles();
-  const [data, setData] = useState([])
+  const [data_inicial, setDataInicial] = useState([])
+  const [data_final, setDataFinal] = useState([])
   const [defaultData,setDefaultData] = useState([])
   const [total_venda,setTotalVenda] = useState(0)
   const [total_compra,setTotalCompra] = useState(0)
@@ -57,12 +58,7 @@ const Dashboard = (props) => {
   const [total_recebimento,setTotalRecebimento] = useState(0)
 
 
-  function dataCorrigida(databruta){
-    var Data  = new Date(databruta);
-    var FirstDay = new Date(Data.getFullYear(), Data.getMonth()+1, 1);
-    var LastDay = new Date(Data.getFullYear(), Data.getMonth()+2, 0);
-    return(FirstDay+","+LastDay) 
-}
+
 
 
   useEffect(() => {
@@ -80,7 +76,7 @@ const Dashboard = (props) => {
     
     var filtros = {}
     var listafiltros = []
-    filtros.data_venda = dataCorrigida(data)
+    filtros.data_venda = data_inicial+','+data_final
     filtros.cond1 = "$gte"
     filtros.cond2 = "$lt"
     listafiltros.push(filtros)
@@ -93,7 +89,7 @@ const Dashboard = (props) => {
     
     var filtros = {}
     var listafiltros = []
-    filtros.data_pagamento = dataCorrigida(data)
+    filtros.data_pagamento = data_inicial+','+data_final
     filtros.cond1 = "$gte"
     filtros.cond2 = "$lt"
     listafiltros.push(filtros)
@@ -106,7 +102,7 @@ const Dashboard = (props) => {
     
     var filtros = {}
     var listafiltros = []
-    filtros.datacad_despesa = dataCorrigida(data)
+    filtros.datacad_despesa = data_inicial+','+data_final
     filtros.cond1 = "$gte"
     filtros.cond2 = "$lt"
     listafiltros.push(filtros)
@@ -119,7 +115,7 @@ const Dashboard = (props) => {
 
     var filtros = {}
     var listafiltros = []
-    filtros.data_compra =  dataCorrigida(data)
+    filtros.data_compra =  data_inicial+','+data_final
     filtros.cond1 = "$gte"
     filtros.cond2 = "$lt"
     listafiltros.push(filtros)
@@ -132,7 +128,7 @@ const Dashboard = (props) => {
 
     var filtros = {}
     var listafiltros = []
-    filtros.data_recebimento =  dataCorrigida(data)
+    filtros.data_recebimento = data_inicial+','+data_final
     filtros.cond1 = "$gte"
     filtros.cond2 = "$lt"
     listafiltros.push(filtros)
@@ -145,7 +141,7 @@ const Dashboard = (props) => {
 
     var filtros = {}
     var listafiltros = []
-    filtros.data_cheque =  dataCorrigida(data)
+    filtros.data_cheque =  data_inicial+','+data_final
     filtros.cond1 = "$gte"
     filtros.cond2 = "$lt"
     listafiltros.push(filtros)
@@ -159,7 +155,7 @@ const Dashboard = (props) => {
 
     var filtros = {}
     var listafiltros = []
-    filtros.data_dinheiro =  dataCorrigida(data)
+    filtros.data_dinheiro =  data_inicial+','+data_final
     filtros.cond1 = "$gte"
     filtros.cond2 = "$lt"
     listafiltros.push(filtros)
@@ -177,7 +173,18 @@ const Dashboard = (props) => {
     carregar_despesas()
     carregar_pagamento()
 
-  }, [data] )
+  }, [data_inicial] )
+
+  useEffect(() => {
+    carregar_vendas()
+    carregar_compras() 
+    carregar_recebimentos()
+    carregar_cheques()
+    carregar_dinheiros()
+    carregar_despesas()
+    carregar_pagamento()
+
+  }, [data_final] )
 
   useEffect(() => {
     
@@ -262,7 +269,6 @@ const Dashboard = (props) => {
     setTotalDinheiro_Pagamento(0)
     var total_recebimento = 0
     var total_pagamento = 0
-    console.log("yuri")
     if(props.dinheiro.length !=0){
       props.dinheiro.map(dinheiro =>{
         if(dinheiro.status_dinheiro === 'E'){
@@ -327,14 +333,27 @@ const Dashboard = (props) => {
           <TextField
             
             name="data"
-            label="Mês*"
+            label="Data inicial*"
             type="date"
             className={classes.textField}
             InputLabelProps={{
                 shrink: true,
             }}
-            value={data}
-            onChange={e => setData(e.target.value)}
+            value={data_inicial}
+            onChange={e => setDataInicial(e.target.value)}
+          />
+
+          <TextField
+            
+            name="data"
+            label="Data final*"
+            type="date"
+            className={classes.textField}
+            InputLabelProps={{
+                shrink: true,
+            }}
+            value={data_final}
+            onChange={e => setDataFinal(e.target.value)}
           />
 
         </Grid>

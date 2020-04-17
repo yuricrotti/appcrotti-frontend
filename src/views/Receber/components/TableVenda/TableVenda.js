@@ -49,13 +49,12 @@ const TableVenda = props => {
   const [lista_receber,setLista_receber] = useState([])
   
   function dataFormatada(data){
-    var data = new Date(data),
-        dia  = data.getDate().toString(),
-        diaF = (dia.length === 1) ? '0'+dia : dia,
-        mes  = (data.getMonth() + 1 ).toString(), //+1 pois no getMonth Janeiro começa com zero.
-        mesF = (mes.length === 1) ? '0'+mes : mes,
-        anoF = data.getFullYear();
-    return diaF+"/"+mesF+"/"+anoF;
+    var date = new Date(data)
+    var day = date.getDate() + 1;
+    var month = date.getMonth();
+    var year = date.getFullYear();
+    var dateFormatted = day +'/'+ (month++) +'/'+ year;
+    return dateFormatted;
 }
   function getClientename(cliente){
 

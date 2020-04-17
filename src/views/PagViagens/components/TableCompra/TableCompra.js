@@ -49,13 +49,12 @@ const TableCompra = props => {
   const [lista_pagar,setLista_pagar] = useState([])
   
   function data_formata(datac){
-    var data = new Date(datac),
-        dia  = data.getDate().toString(),
-        diaF = (dia.length === 1) ? '0'+dia : dia,
-        mes  = (data.getMonth() + 1 ).toString(), //+1 pois no getMonth Janeiro começa com zero.
-        mesF = (mes.length === 1) ? '0'+mes : mes,
-        anoF = data.getFullYear();
-    return diaF+"/"+mesF+"/"+anoF;
+    var date = new Date(datac)
+    var day = date.getDate() + 1;
+    var month = date.getMonth();
+    var year = date.getFullYear();
+    var dateFormatted = day +'/'+ (month++) +'/'+ year;
+    return dateFormatted;
 }
   function fornecedor_nome(Fornecedor){
 
