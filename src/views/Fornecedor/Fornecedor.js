@@ -2,6 +2,8 @@ import React, { useState , useEffect} from 'react';
 import { makeStyles } from '@material-ui/styles';
 import {FornecedorCad,FornecedorTable} from './components';
 
+import timezone from "../../services/timezone";
+
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { 
@@ -25,6 +27,7 @@ const Fornecedor = (props) => {
 
   useEffect(() => {
     props.listar_fornecedor();
+    timezone.add_timezone_offset("12/01/2020");
   }, [] )
 
   return (

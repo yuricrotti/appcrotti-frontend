@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
-
+import timezone from '../../../../services/timezone'
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {
@@ -66,7 +66,7 @@ const PacelaCad = props => {
     setStatus_form(true)
       const parcela = {
         id_parcela: parseInt(Date.now()),
-        datapagamento_parcela:values.datapagamento_parcela,
+        datapagamento_parcela:timezone.add_timezone_offset(values.datapagamento_parcela),
         valor_parcela:values.valor_parcela,
         fornecedor_parcela: props.despesa.fornecedor_despesa,
         status_parcela:"E",

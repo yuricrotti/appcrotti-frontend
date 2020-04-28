@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
-
+import timezone from '../../../../services/timezone'
 import { makeStyles } from '@material-ui/styles';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
@@ -79,7 +79,7 @@ const cheque = {
     id_cheque: parseInt(Date.now()),
     nome_cheque:values.nome_cheque,
     valor_cheque:values.valor_cheque,
-    data_cheque: values.data_cheque,
+    data_cheque: timezone.add_timezone_offset(values.data_cheque),
     status_cheque: props.tipo,
   }  
  // console.log(cheque)

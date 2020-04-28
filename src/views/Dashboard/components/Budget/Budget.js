@@ -62,7 +62,7 @@ const Budget = props => {
             >
               {props.titulo}
             </Typography>
-            <Typography variant="h3">{props.totalvenda}</Typography>
+            <Typography variant="h3">{props.valor.toFixed(2)}</Typography>
           </Grid>
          
         </Grid>

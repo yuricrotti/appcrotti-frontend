@@ -2,6 +2,8 @@ import React, { useState,useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
+import timezone from "../../../../services/timezone"
+
 import {CadCheque} from '../CadCheque'
 
 import { makeStyles } from '@material-ui/styles';
@@ -117,7 +119,7 @@ useEffect(() => {
       if(numero_cheques != 0){
           for (let index = 0; index < numero_cheques; index++) {
          // console.log("Cheque : "+index);
-          vetorCheques.push(<CadCheque   tipo ='P' id_cheque = {index} adicionar_lista_cheque={ props.adicionar_lista_cheque}></CadCheque>);
+          vetorCheques.push(<CadCheque   tipo ='E' id_cheque = {index} adicionar_lista_cheque={ props.adicionar_lista_cheque}></CadCheque>);
           }
           setCheques(vetorCheques)
   

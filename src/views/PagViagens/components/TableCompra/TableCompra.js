@@ -50,8 +50,8 @@ const TableCompra = props => {
   
   function data_formata(datac){
     var date = new Date(datac)
-    var day = date.getDate() + 1;
-    var month = date.getMonth();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
     var year = date.getFullYear();
     var dateFormatted = day +'/'+ (month++) +'/'+ year;
     return dateFormatted;

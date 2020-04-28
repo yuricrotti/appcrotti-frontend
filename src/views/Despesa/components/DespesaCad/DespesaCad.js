@@ -6,7 +6,7 @@ import {
 } from 'formik';
 import * as Yup from 'yup';
 
-
+import timezone from '../../../../services/timezone'
 
 import { Button,
   Card,
@@ -93,7 +93,7 @@ const DespesaCad = props => {
         numeroparcela_despesa:values.numeroparcela_despesa,
         fornecedor_despesa:fornecedor_despesa,
         valortotal_despesa : values.valortotal_despesa,
-        datacad_despesa : values.data,
+        datacad_despesa : timezone.add_timezone_offset(values.data),
         descricao_despesa:values.descricao_despesa,
         status_despesa :"E",
       }

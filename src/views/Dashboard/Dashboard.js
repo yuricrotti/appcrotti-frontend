@@ -359,33 +359,46 @@ const Dashboard = (props) => {
         </Grid>
         <Grid
           item
-          lg={4}
+          lg={3}
           sm={6}
-          xl={4}
+          xl={3}
           xs={12}
         >
-          <Budget totalvenda={total_venda}  titulo ="TOTAL VENDIDO "></Budget>
+          <Budget valor={total_venda}  titulo ="TOTAL VENDIDO "></Budget>
         </Grid>
         <
           Grid
           item
-          lg={4}
+          lg={3}
           sm={6}
-          xl={4}
+          xl={3}
           xs={12}
         >
-          <Budget totalvenda={total_compra}  titulo ="TOTAL COMPRA "></Budget>
+          <Budget valor={total_compra}  titulo ="TOTAL COMPRA "></Budget>
         </Grid>
         <
           Grid
           item
-          lg={4}
+          lg={3}
           sm={6}
-          xl={4}
+          xl={3}
           xs={12}
         >
-          <Budget totalvenda={total_venda - total_compra}  titulo ="TOTAL LUCRO "></Budget>
+          <Budget valor={total_venda - total_compra}  titulo ="LUCRO BRUTO"></Budget>
         </Grid>
+
+        <
+          Grid
+          item
+          lg={3}
+          sm={6}
+          xl={3}
+          xs={12}
+        >
+          <Budget valor={total_venda - total_compra - total_despesa}  titulo ="LUCRO LÍQUIDO"></Budget>
+        </Grid>
+
+        
         
         
         <Grid
@@ -395,7 +408,7 @@ const Dashboard = (props) => {
           xl={3}
           xs={12}
         >
-           <Budget totalvenda={total_recebimento}  titulo ="TOTAL RECEBIDO "></Budget>
+           <Budget valor={total_recebimento}  titulo ="TOTAL RECEBIDO "></Budget>
         </Grid>
 
         <Grid
@@ -405,7 +418,7 @@ const Dashboard = (props) => {
           xl={3}
           xs={12}
           >
-          <Budget totalvenda={total_cheque_recebimento}  titulo ="TOTAL CHEQUE "></Budget>
+          <Budget valor={total_cheque_recebimento}  titulo ="TOTAL CHEQUE "></Budget>
         </Grid>
 
         <Grid
@@ -415,7 +428,7 @@ const Dashboard = (props) => {
           xl={3}
           xs={12}
         >
-          <Budget totalvenda={total_dinheiro_recebimento}  titulo ="TOTAL DINHEIRO "></Budget>
+          <Budget valor={total_dinheiro_recebimento}  titulo ="TOTAL DINHEIRO "></Budget>
         </Grid>
 
         <Grid
@@ -425,7 +438,7 @@ const Dashboard = (props) => {
         xl={3}
         xs={12}
         >
-        <Budget totalvenda={total_dinheiro_recebimento+total_cheque_recebimento}  titulo ="RECEBIDO (REAL) "></Budget>
+        <Budget valor={total_dinheiro_recebimento+total_cheque_recebimento}  titulo ="RECEBIDO (REAL) "></Budget>
         </Grid>
 
 
@@ -436,7 +449,7 @@ const Dashboard = (props) => {
           xl={3}
           xs={12}
           >
-          <Budget totalvenda={total_despesa}  titulo ="DESPESA"></Budget>
+          <Budget valor={total_despesa}  titulo ="DESPESA"></Budget>
         </Grid>
 
         <Grid
@@ -446,7 +459,7 @@ const Dashboard = (props) => {
           xl={3}
           xs={12}
           >
-          <Budget totalvenda={total_pagamentos}  titulo ="PAGAMENTO"></Budget>
+          <Budget valor={total_pagamentos}  titulo ="PAGAMENTO"></Budget>
         </Grid>
 
         
@@ -457,7 +470,7 @@ const Dashboard = (props) => {
         xl={3}
         xs={12}
         >
-        <Budget totalvenda={total_pagamentos+total_despesa}  titulo =" DESPESA + PAGAMENTO  "></Budget>
+        <Budget valor={total_pagamentos+total_despesa}  titulo =" DESPESA + PAGAMENTO  "></Budget>
         </Grid>
 
         <Grid
@@ -467,7 +480,7 @@ const Dashboard = (props) => {
         xl={3}
         xs={12}
         >
-        <Budget totalvenda={total_dinheiro_pagamento+total_cheque_pagamento}  titulo =" DESPESA + PAGAMENTO (REAL) "></Budget>
+        <Budget valor={total_dinheiro_pagamento+total_cheque_pagamento}  titulo =" DESPESA + PAGAMENTO (REAL) "></Budget>
         </Grid>
 
 

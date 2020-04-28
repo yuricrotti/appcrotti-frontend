@@ -50,8 +50,8 @@ const TableVenda = props => {
   
   function dataFormatada(data){
     var date = new Date(data)
-    var day = date.getDate() + 1;
-    var month = date.getMonth();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
     var year = date.getFullYear();
     var dateFormatted = day +'/'+ (month++) +'/'+ year;
     return dateFormatted;

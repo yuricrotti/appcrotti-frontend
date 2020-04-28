@@ -5,7 +5,7 @@ import {
   Formik
 } from 'formik';
 import * as Yup from 'yup';
-
+import timezone from "../../../../services/timezone";
 
 import { Button,
   Card,
@@ -99,7 +99,7 @@ const CadViajem = props => {
         quantidade_venda:values.quantidade_venda,
         valor_venda:values.valor_venda,
         valor_total_venda:values.quantidade_venda*values.valor_venda,
-        data_venda:values.data,
+        data_venda:timezone.add_timezone_offset(values.data),
         status_venda:"E",
       }
 
@@ -111,7 +111,7 @@ const CadViajem = props => {
         quantidade_compra:values.quantidade_compra,
         valor_compra:values.valor_compra,
         valor_total_compra:values.valor_compra*values.quantidade_compra,
-        data_compra:values.data,
+        data_compra:timezone.add_timezone_offset(values.data),
         status_compra:"E",
       }
       const viajem ={
@@ -119,7 +119,7 @@ const CadViajem = props => {
         descricao_viajem : "Viajem realizada (produto:"+produto_venda_compra+"). A carga saiu do fornecedor " +fornecedor_compra.nome_fornecedor+". Foi entregue ao cliente " + cliente_venda.nomecliente +".",
         compra_viajem : compra,
         venda_viajem : venda,
-        data_viajem:values.data,
+        data_viajem:timezone.add_timezone_offset(values.data),
         status_viajem :"E",
       } 
 
