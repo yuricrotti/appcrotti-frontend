@@ -246,11 +246,16 @@ const Dashboard = (props) => {
     var total_pagamento = 0
     if(props.cheque.length !=0){
       props.cheque.map(cheque =>{
-        if(cheque.status_cheque === 'E'){
+
+        if (cheque.status_cheque === 'EP' || cheque.status_cheque === 'ED' ){
           total_recebimento = Number(total_recebimento) + Number(cheque.valor_cheque)
-        }else{
+          total_pagamento = Number(total_pagamento) + Number(cheque.valor_cheque)
+        } else if(cheque.status_cheque === 'E'){
+          total_recebimento = Number(total_recebimento) + Number(cheque.valor_cheque)
+        } else{
           total_pagamento = Number(total_pagamento) + Number(cheque.valor_cheque)
         }
+            
 
       })
       console.log("soma cheque recebimento :",total_recebimento)

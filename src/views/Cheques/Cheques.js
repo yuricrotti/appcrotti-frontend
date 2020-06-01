@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { 
     listar_cheque_filtros,
+    descontar_cheque,
    } from '../../store/chequeReducer'
 
 
@@ -35,7 +36,7 @@ const Cheques = (props) => {
     <div className={classes.root}>
         <FiltroCheques listar_cheque_filtros={props.listar_cheque_filtros}></FiltroCheques>
         <div className={classes.content}>
-            <TableCheques cheques={props.cheque}></TableCheques>
+            <TableCheques descontar_cheque={props.descontar_cheque} cheques={props.cheque}></TableCheques>
         </div>
     </div>
    
@@ -50,6 +51,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => 
 bindActionCreators({
     listar_cheque_filtros,
+    descontar_cheque,
   
 }, dispatch)
 

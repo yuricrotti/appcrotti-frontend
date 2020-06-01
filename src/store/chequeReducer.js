@@ -7,7 +7,9 @@ const ACTIONS = {
     SALVAR: 'CHEQUE_SALVAR',
     LISTAR: 'CHEQUE_LISTAR',
     LIMPAR: 'CHEQUE_LIMPAR',
-    LISTAR_FILTRO :'CHEQUE_LISTAR_FILTRO'
+    LISTAR_FILTRO :'CHEQUE_LISTAR_FILTRO',
+    ALTERARSTATUS: 'CHEQUE_ALTERARSTATUS',
+    DESCONTAR: 'CHEQUE_DESCONTAR',
 
 }
 
@@ -23,6 +25,10 @@ export const chequeReducer = (state = ESTADO_INICIAL, action) => {
             return {...state,cheque:[...state.cheque,action.cheque]}   
         case ACTIONS.LISTAR_FILTRO:
             return {...state,cheque:action.cheque}
+        case ACTIONS.ALTERARSTATUS:
+            return {...state,cheque:action.cheque}   
+        case ACTIONS.DESCONTAR:
+                return {...state,cheque:action.cheque}     
         case ACTIONS.SALVAR:
                 return {...state,cheque:[...state.cheque,action.cheque]} 
         case ACTIONS.LIMPAR:
@@ -35,6 +41,44 @@ export const chequeReducer = (state = ESTADO_INICIAL, action) => {
 
 
 
+export function alterarstatus_cheque(id,status){
+ 
+    return dispatch =>{
+        api.put('/cheque/updatestatus/'+id,{
+            status_atual:status
+        })
+        .then(response => {
+            dispatch({
+                type: ACTIONS.ALTERARSTATUS,
+                cheque : []
+            })   
+        })
+        .catch(
+            erro =>{console.log(erro)})
+
+    }  
+ 
+}
+
+export function descontar_cheque(id,status){
+
+    console.log("descontando cheque...")
+    return dispatch =>{
+        api.put('/cheque/descontarcheque/'+id,{
+            status_atual:status
+        })
+        .then(response => {
+            dispatch({
+                type: ACTIONS.DESCONTAR,
+                cheque : []
+            })   
+        })
+        .catch(
+            erro =>{console.log(erro)})
+
+    }  
+ 
+}
 
 export function adicionar_lista_cheque(cheque){
     

@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { makeStyles } from '@material-ui/styles';
 
+import DeleteIcon from '@material-ui/icons/Delete';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import LockIcon from '@material-ui/icons/Lock';
+
 import {
   Card,
   CardContent,
@@ -12,6 +16,7 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  IconButton,
 } from '@material-ui/core';
 
 
@@ -61,6 +66,8 @@ const TableCheques = props => {
                     <TableCell>Data Cadastro</TableCell>
                     <TableCell>Data do Cheque</TableCell>
                     <TableCell>Valor</TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell>Descontar</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -70,6 +77,18 @@ const TableCheques = props => {
                                 <TableCell>{data_formatada(cheque.datacad_cheque)}</TableCell>
                                 <TableCell>{data_formatada(cheque.data_cheque)}</TableCell>
                                 <TableCell>{cheque.valor_cheque}</TableCell>
+                                <TableCell>{cheque.status_cheque}</TableCell>
+                                <IconButton onClick = {()=> props.descontar_cheque(cheque.id_cheque,cheque.status_cheque)} aria-label="delete">
+                                  { (cheque.status_cheque !== 'ED ' && cheque.status_cheque !== 'EP') ? 
+                                        (
+                                          <LockOpenIcon />
+                                        ) : 
+                                        (
+                                          
+                                          <LockIcon />
+                                        )
+                                  }        
+                                  </IconButton>  
                                           
                           </TableRow>
                     );

@@ -13,7 +13,9 @@ import {
   RadioGroup,
   Radio,
   Button,
-  TextField
+  TextField,
+  Checkbox,
+  FormGroup,
 
 } from '@material-ui/core';
 
@@ -44,6 +46,7 @@ const FiltroCheques = props => {
   const classes = useStyles();
 
   const [periodo, set_perido] = React.useState('Todas');
+  const [status, set_status] = React.useState('Todas');
   const [data_cheque_inicial, set_Data_cheque_inicial] = useState([])
   const [data_cheque_final, set_Data_cheque_final] = useState([])
 
@@ -54,6 +57,11 @@ const FiltroCheques = props => {
       set_Data_cheque_final([])
     }  
     set_perido(event.target.value);
+  };
+
+  const status_change = event => {
+   
+    set_status(event.target.value);
   };
  
   const onSubmit = (event) => {
@@ -68,7 +76,28 @@ const FiltroCheques = props => {
       filtros.cond2 = "$lt"
       listafiltros.push(filtros)
       filtros = {}
-    }     
+    } 
+    
+    if(status === "Recebido"){
+      filtros.status_cheque = 'E'
+      filtros.cond1 = "$eq"
+      listafiltros.push(filtros)
+      filtros = {}
+     
+    } else if(status === "Pago"){
+      filtros.status_cheque = 'EP'
+      filtros.cond1 = "$eq"
+      listafiltros.push(filtros)
+      filtros = {}
+
+    } else if(status === "Descontato"){
+      filtros.status_cheque = 'ED'
+      filtros.cond1 = "$eq"
+      listafiltros.push(filtros)
+      filtros = {}
+    }
+
+
     props.listar_cheque_filtros(listafiltros)
   }
 
@@ -80,7 +109,25 @@ const FiltroCheques = props => {
               Filtros para Cheques
           </Typography>
           <Grid container spacing={3}>
-            <Grid item xs={6}>
+
+          <Grid item xs={3}>
+              <Card className={classes.root} variant="outlined" fullWidth>
+                <CardContent>
+                  <FormControl component="fieldset">
+                      <FormLabel component="legend">Período</FormLabel>
+                      <RadioGroup aria-label="gender" name="periodo" value={status} onChange={status_change}>
+                          <FormControlLabel value="Recebido" control={<Radio />} label="Recebido" />
+                          <FormControlLabel value="Pago" control={<Radio />} label="Pago" />     
+                          <FormControlLabel value="Descontato" control={<Radio />} label="Descontato" />
+                          <FormControlLabel value="Todas" control={<Radio />} label="Todas" />                                              
+                      </RadioGroup>
+
+                  </FormControl>
+                </CardContent>  
+              </Card>
+            </Grid>
+
+            <Grid item xs={3}>
               <Card className={classes.root} variant="outlined" fullWidth>
                 <CardContent>
                   <FormControl component="fieldset">
@@ -95,7 +142,7 @@ const FiltroCheques = props => {
               </Card>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={3}>
               <Card className={classes.root} variant="outlined" fullWidth>
                 <CardContent>
                   <FormControl component="fieldset">
